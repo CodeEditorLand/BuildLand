@@ -29,7 +29,9 @@ fn script(repository:&str) -> Result<(), Box<dyn std::error::Error>> {
 
 	// Get origin URL
 	let output = Command::new("git").args(&["remote", "get-url", "origin"]).output()?;
+
 	let origin = String::from_utf8(output.stdout)?.trim().to_string();
+
 	let origin = origin.replace("git@github.com:", "ssh://git@github.com/");
 
 	// Set origin URL
@@ -40,7 +42,9 @@ fn script(repository:&str) -> Result<(), Box<dyn std::error::Error>> {
 
 	// Get upstream URL
 	let output = Command::new("gh").args(&["repo", "view", "--json", "parent"]).output()?;
+
 	let upstream_json = String::from_utf8(output.stdout)?;
+
 	let upstream = match serde_json::from_str::<serde_json::Value>(&upstream_json) {
 		Ok(json) => {
 			let owner = json.get("parent").and_then(|parent| {
@@ -49,9 +53,11 @@ fn script(repository:&str) -> Result<(), Box<dyn std::error::Error>> {
 					.and_then(|owner| owner.get("login"))
 					.and_then(|login| login.as_str())
 			});
+
 			let name = json
 				.get("parent")
 				.and_then(|parent| parent.get("name").and_then(|name| name.as_str()));
+
 			match (owner, name) {
 				(Some(owner), Some(name)) => {
 					Some(format!("ssh://git@github.com/{}/{}.git", owner, name))

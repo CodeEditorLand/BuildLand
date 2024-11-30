@@ -5,6 +5,7 @@ use serde_json::{json, Value};
 fn main() {
 	// Read package.json file
 	let package_json_str = fs::read_to_string("package.json").expect("Failed to read package.json");
+
 	let mut package_json:Value =
 		serde_json::from_str(&package_json_str).expect("Failed to parse package.json");
 
@@ -108,6 +109,7 @@ fn main() {
 	];
 
 	remove_dependencies(&mut package_json, &omit, "dependencies");
+
 	remove_dependencies(&mut package_json, &omit, "devDependencies");
 
 	// Write modified package.json back to file

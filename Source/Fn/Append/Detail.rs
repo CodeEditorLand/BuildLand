@@ -8,16 +8,19 @@ fn main() {
 		Ok(dir) => dir,
 		Err(_) => {
 			eprintln!("Failed to get the current directory.");
+
 			return;
 		},
 	};
 
 	// Read the list of repositories from the file
 	let repository_file_path = current_dir.join("../Cache/Repository/Build.md");
+
 	let repository_list = match fs::read_to_string(&repository_file_path) {
 		Ok(content) => content,
 		Err(_) => {
 			eprintln!("Failed to read the repository list file.");
+
 			return;
 		},
 	};
@@ -25,6 +28,7 @@ fn main() {
 	// Process each repository
 	for repository in repository_list.lines() {
 		let repository_path = current_dir.join(repository.replace("CodeEditorLand/", ""));
+
 		if let Err(_) = process_repository(&repository_path) {
 			eprintln!("Failed to process repository: {}", repository);
 		}
@@ -68,6 +72,7 @@ fn process_repository(repository_path:&Path) -> std::io::Result<()> {
 fn execute_script(package_json_path:&Path) -> std::io::Result<()> {
 	// Execute the script for the package.json file
 	let script_path = package_json_path.parent().unwrap().join("../Action/Append/Detail.sh");
+
 	let status = std::process::Command::new("bash")
 		.arg("-c")
 		.arg(&script_path.to_string_lossy())

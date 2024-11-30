@@ -8,6 +8,7 @@ fn main() {
 		Ok(contents) => contents.lines().map(|s| s.trim().to_string()).collect::<Vec<_>>(),
 		Err(e) => {
 			eprintln!("Error reading repository list: {}", e);
+
 			std::process::exit(1);
 		},
 	};

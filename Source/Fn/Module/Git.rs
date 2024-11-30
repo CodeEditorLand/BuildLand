@@ -5,6 +5,7 @@ fn main() {
 
 	// Context: CodeEditorLand/Environment/Stream
 	let directory = std::env::current_dir().expect("Failed to get current directory");
+
 	let cache_path = directory.join("../Cache/Repository/Build.md");
 
 	let repositories = read_array(&cache_path).expect("Failed to read repositories");
@@ -31,7 +32,9 @@ fn main() {
 
 fn read_array(file_path:&std::path::Path) -> Result<Vec<String>, std::io::Error> {
 	let content = std::fs::read_to_string(file_path)?;
+
 	let repositories:Vec<String> = content.lines().map(|s| s.to_string()).collect();
+
 	Ok(repositories)
 }
 
@@ -53,6 +56,7 @@ fn script(folder:&str, repository:&str) {
 	.to_string();
 
 	println!("Folder: {}", folder);
+
 	println!("Origin: {}", origin);
 
 	let mut submodule = format!(
@@ -62,6 +66,7 @@ fn script(folder:&str, repository:&str) {
 
 	// Append submodule entry to .gitmodules
 	let mut file = File::create("../../.gitmodules").expect("Failed to create .gitmodules file");
+
 	file.write_all(submodule.as_bytes())
 		.expect("Failed to write to .gitmodules file");
 

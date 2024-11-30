@@ -5,6 +5,7 @@ fn main() {
 
 	// Context: CodeEditorLand/Environment/Stream
 	let directory = std::env::current_dir().expect("Failed to get current directory");
+
 	let cache_path = directory.join("../Cache/Repository/Build.md");
 
 	let repositories = read_array(&cache_path).expect("Failed to read repositories");
@@ -28,7 +29,9 @@ fn main() {
 
 fn read_array(file_path:&std::path::Path) -> Result<Vec<String>, std::io::Error> {
 	let content = std::fs::read_to_string(file_path)?;
+
 	let repositories:Vec<String> = content.lines().map(|s| s.to_string()).collect();
+
 	Ok(repositories)
 }
 
@@ -36,6 +39,7 @@ fn script(folder:&str) {
 	let mut rename = String::new();
 
 	let first_char = folder.chars().next().unwrap();
+
 	rename.push_str(&first_char.to_uppercase().to_string());
 
 	for (i, c) in folder.chars().enumerate() {
@@ -57,6 +61,7 @@ fn script(folder:&str) {
 	rename = rename.replace("vscode", "Land");
 
 	println!("Rename: ");
+
 	println!("{}", rename);
 
 	let output = Command::new("gh")

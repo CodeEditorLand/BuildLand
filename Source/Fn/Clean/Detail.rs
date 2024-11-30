@@ -10,16 +10,19 @@ fn main() {
 		Ok(dir) => dir,
 		Err(e) => {
 			eprintln!("Error getting current directory: {}", e);
+
 			std::process::exit(1);
 		},
 	};
 
 	// Read the list of repositories
 	let repository_file = directory.join("../Cache/Repository/Build.md");
+
 	let repository_contents = match fs::read_to_string(&repository_file) {
 		Ok(contents) => contents,
 		Err(e) => {
 			eprintln!("Error reading repository file {:?}: {}", repository_file, e);
+
 			std::process::exit(1);
 		},
 	};
@@ -37,6 +40,7 @@ fn main() {
 
 fn clean_repository(directory:&std::path::Path, repository:&str) -> Result<(), Box<dyn Error>> {
 	let folder = repository.replace("CodeEditorLand/", "");
+
 	let folder_path = directory.join(&folder);
 
 	// Change directory to repository

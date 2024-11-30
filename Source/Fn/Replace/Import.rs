@@ -44,10 +44,12 @@ pub fn replace() {
 
 	// Initialize the source map and session
 	let cm = SourceMap::default();
+
 	let handler = Box::new(Session { handler:&swc_ecma_parser::Handler::new(&cm) });
 
 	// Initialize the parser
 	let comments = SingleThreadedComments::default();
+
 	let lexer = Lexer::new(
 		Syntax::Typescript(TsConfig {
 			tsx:false, // Set to true if you want to support JSX
@@ -62,6 +64,7 @@ pub fn replace() {
 		),
 		Some(&comments),
 	);
+
 	let mut parser = Parser::new_from(lexer);
 
 	// Parse the TypeScript code
@@ -73,6 +76,7 @@ pub fn replace() {
 			ModuleItem::Stmt(Stmt::Import(import_stmt)) => {
 				// Check if it's an import statement you want to replace
 				let src_str = cm.span_to_snippet(import_stmt.src.value.span).unwrap();
+
 				if src_str == "'vs/platform/userDataSync/common/userDataSyncLocalStoreService'" {
 					// Replace the import with your desired import
 					*item = ModuleItem::Stmt(Stmt::Decl(Decl::Var(VarDecl {
@@ -94,6 +98,7 @@ pub fn replace() {
 						.collect(),
 					})));
 				}
+
 				true // Keep the item
 			},
 			_ => true, // Keep other items

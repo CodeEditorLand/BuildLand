@@ -34,6 +34,7 @@ fn process_repository(repository:&str, current_dir:&std::path::Path) -> std::io:
 
 	// Execute GitHub CLI commands
 	execute_command("gh", &["repo", "set-default", &get_origin_url()])?;
+
 	execute_command(
 		"gh",
 		&[

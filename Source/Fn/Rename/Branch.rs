@@ -5,6 +5,7 @@ fn main() {
 
 	// Context: CodeEditorLand/Environment/Stream
 	let directory = std::env::current_dir().expect("Failed to get current directory");
+
 	let cache_path = directory.join("../Cache/Repository/Build.md");
 
 	let repositories = read_array(&cache_path).expect("Failed to read repositories");
@@ -28,7 +29,9 @@ fn main() {
 
 fn read_array(file_path:&std::path::Path) -> Result<Vec<String>, std::io::Error> {
 	let content = std::fs::read_to_string(file_path)?;
+
 	let repositories:Vec<String> = content.lines().map(|s| s.to_string()).collect();
+
 	Ok(repositories)
 }
 

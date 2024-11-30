@@ -12,9 +12,11 @@ fn main() {
 		Ok(dir) => dir,
 		Err(err) => {
 			eprintln!("Error getting current directory: {}", err);
+
 			return;
 		},
 	};
+
 	println!("Current directory: {:?}", current_dir);
 
 	// Define the JSON content
@@ -52,18 +54,22 @@ fn main() {
 
 	// Open package.json file
 	let package_json_path = current_dir.join("package.json");
+
 	let mut package_json_file = match File::open(&package_json_path) {
 		Ok(file) => file,
 		Err(err) => {
 			eprintln!("Error opening package.json file: {}", err);
+
 			return;
 		},
 	};
 
 	// Read package.json content
 	let mut package_json_content = String::new();
+
 	if let Err(err) = package_json_file.read_to_string(&mut package_json_content) {
 		eprintln!("Error reading package.json content: {}", err);
+
 		return;
 	}
 
@@ -72,22 +78,26 @@ fn main() {
 
 	// Write new content to a temporary file
 	let package_json_tmp_path = current_dir.join("package.json.tmp");
+
 	let mut package_json_tmp_file = match File::create(&package_json_tmp_path) {
 		Ok(file) => file,
 		Err(err) => {
 			eprintln!("Error creating package.json.tmp file: {}", err);
+
 			return;
 		},
 	};
 
 	if let Err(err) = package_json_tmp_file.write_all(new_content.as_bytes()) {
 		eprintln!("Error writing to package.json.tmp file: {}", err);
+
 		return;
 	}
 
 	// Rename temporary file to package.json
 	if let Err(err) = std::fs::rename(&package_json_tmp_path, &package_json_path) {
 		eprintln!("Error renaming package.json.tmp to package.json: {}", err);
+
 		return;
 	}
 }

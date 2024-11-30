@@ -129,6 +129,7 @@ fn restore_files_from_parent(repo:&Repository, filename:&str) -> Result<()> {
 			restore_file_from_parent(repo, path.to_str().unwrap())?;
 		}
 	}
+
 	Ok(())
 }
 
@@ -184,6 +185,7 @@ fn fetch_from_remote(repo:&Repository, remote_name:&str, no_tags:bool, depth:u32
 	if no_tags {
 		fetch_options.download_tags(AutotagOption::None);
 	}
+
 	fetch_options.depth(depth);
 
 	remote
