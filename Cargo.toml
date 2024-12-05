@@ -1,3 +1,32 @@
+[[bin]]
+name = "Maintain"
+path = "Source/Library.rs"
+
+[dependencies]
+# tokio = { version = "1.42.0", features = ["full"] }
+clap = { version = "4.5.22", features = ["cargo", "derive"] }
+dashmap = { version = "6.1.0" }
+dotenv = { version = "0.15" }
+futures = { version = "0.3.31" }
+git2 = { version = "0.19.0" }
+itertools = { version = "0.13.0" }
+num_cpus = { version = "1.16.0" }
+octocrab = { version = "0.42.1" }
+proc_use = { version = "0.2.1" }
+rayon = { version = "1.10.0" }
+regex = { version = "1.11.1" }
+rusqlite = { version = "0.32.1", features = ["bundled"] }
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = { version = "1.0.133" }
+tokio = { version = "1.42", features = ["full"] }
+toml = { version = "0.8.19" }
+unbug = { version = "0.3.0", features = ["enable"] }
+walkdir = { version = "2.5.0" }
+
+[build-dependencies]
+serde = { version = "1.0.215", features = ["derive"] }
+toml = { version = "0.8.19" }
+
 [package]
 autobenches = false
 autobins = false
@@ -12,24 +41,3 @@ name = "Maintain"
 publish = false
 repository = "https://github.com/CodeEditorLand/CargoMaintain"
 version = "0.0.1"
-
-[[bin]]
-name = "Maintain"
-path = "Source/Library.rs"
-
-[dependencies]
-clap = { version = "4.5.20", features = ["cargo", "derive"] }
-git2 = "0.19.0"
-proc_use = "0.2.1"
-rayon = "1.10.0"
-serde = { version = "1.0.210", features = ["derive"] }
-serde_json = "1.0.128"
-toml = "0.8.19"
-dotenv = "0.15"
-octocrab = "0.42.1"
-tokio = { version = "1.0", features = ["full"] }
-rusqlite = { version = "0.32.1", features = ["bundled"] }
-
-[build-dependencies]
-serde = { version = "1.0.215", features = ["derive"] }
-toml = "0.8.19"
