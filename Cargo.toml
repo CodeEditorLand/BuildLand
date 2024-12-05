@@ -15,10 +15,6 @@ version = "0.0.1"
 
 [[bin]]
 name = "Maintain"
-path = "Source/Fn/Binary/Maintain.rs"
-
-[lib]
-name = "Library"
 path = "Source/Library.rs"
 
 [dependencies]
@@ -33,3 +29,7 @@ dotenv = "0.15"
 octocrab = "0.42.1"
 tokio = { version = "1.0", features = ["full"] }
 rusqlite = { version = "0.32.1", features = ["bundled"] }
+
+[build-dependencies]
+serde = { version = "1.0.215", features = ["derive"] }
+toml = "0.8.19"
