@@ -39,5 +39,5 @@ homepage = "https://Maintain.Editor.Land"
 license-file = "LICENSE"
 name = "Maintain"
 publish = false
-repository = "https://github.com/CodeEditorLand/CargoMaintain"
+repository = "https://github.com/CodeEditorLand/Maintain"
 version = "0.0.1"
