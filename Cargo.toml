@@ -2,8 +2,11 @@
 name = "Maintain"
 path = "Source/Library.rs"
 
+[build-dependencies]
+serde = { version = "1.0.217", features = ["derive"] }
+toml = { version = "0.8.19" }
+
 [dependencies]
-# tokio = { version = "1.42.0", features = ["full"] }
 clap = { version = "4.5.27", features = ["cargo", "derive"] }
 dashmap = { version = "6.1.0" }
 dotenv = { version = "0.15" }
@@ -23,9 +26,8 @@ toml = { version = "0.8.19" }
 unbug = { version = "0.4.0" }
 walkdir = { version = "2.5.0" }
 
-[build-dependencies]
-serde = { version = "1.0.217", features = ["derive"] }
-toml = { version = "0.8.19" }
+[lib]
+path = "Source/Library.rs"
 
 [package]
 autobenches = false
